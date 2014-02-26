@@ -85,6 +85,26 @@ module.exports = function(grunt) {
         ],
         tasks: ['sass']
       }
+    },
+
+    jekyll: {
+      docs: {}
+    },
+
+    validation: {
+      options: {
+        charset: 'utf-8',
+        doctype: 'HTML5',
+        failHard: true,
+        reset: true,
+        relaxerror: [
+          'Bad value apple-mobile-web-app-title for attribute name on element meta: Keyword apple-mobile-web-app-title is not registered.',
+          'Attribute ontouchstart not allowed on element body at this point.'
+        ]
+      },
+      files: {
+        src: '_site/**/*.html'
+      }
     }
   });
 
@@ -95,4 +115,5 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['sass', 'concat', 'copy']);
   grunt.registerTask('build', ['sass', 'concat', 'copy']);
+  grunt.registerTask('validate-html', ['jekyll', 'validation']);
 };
